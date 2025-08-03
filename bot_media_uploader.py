@@ -4,9 +4,12 @@ import os
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 bot = telebot.TeleBot(BOT_TOKEN)
 
-@bot.message_handler(commands=['id'])
-def get_id(message):
-    bot.reply_to(message, f"Your Telegram ID is: {message.from_user.id}")
+ALLOWED_USERS = ["5910005316"]
+
+@bot.message_handler(func=lambda msg: str(msg.from_user.id) not in ALLOWED_USERS)
+def block_unauthorized(msg):
+    bot.reply_to(msg, "🚫 This bot is private. You're not allowed to use it.")
+
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):

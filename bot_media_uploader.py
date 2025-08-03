@@ -4,6 +4,10 @@ import os
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 bot = telebot.TeleBot(BOT_TOKEN)
 
+@bot.message_handler(commands=['id'])
+def get_id(message):
+    bot.reply_to(message, f"Your Telegram ID is: {message.from_user.id}")
+
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
     file_id = message.photo[-1].file_id

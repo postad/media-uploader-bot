@@ -31,4 +31,6 @@ def send_welcome(message):
     )
 
 print("🤖 Bot is running...")
+bot.remove_webhook()
 bot.infinity_polling()
+
